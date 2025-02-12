@@ -12,9 +12,14 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-tailwindcss-datepicker": "^2.0.0",
+    "react-tooltip": "^5.28.0",
+    "recharts": "^2.15.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

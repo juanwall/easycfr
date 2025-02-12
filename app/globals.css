@@ -12,3 +12,10 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+button.rounded-l-full {
+  border-top-left-radius: 100% !important;
+  border-bottom-left-radius: 100% !important;
+  border-top-right-radius: 100% !important;
+  border-bottom-right-radius: 100% !important;
+}

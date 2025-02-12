@@ -11,7 +11,13 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { classNames } from '@/lib/utils';
 import Link from 'next/link';
 
-const navigation = [{ name: 'Agency word search', href: '/' }];
+const navigation = [
+  {
+    name: 'Agency analyzer',
+    href: '/',
+    description: `Analyze regulations by agency across time.`,
+  },
+];
 
 const Header = () => {
   const [selectedNavItem, setSelectedNavItem] = useState(navigation[0]);
@@ -92,6 +98,25 @@ const Header = () => {
           </div>
         </DisclosurePanel>
       </Disclosure>
+
+      <div className="py-10">
+        <header>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+              {selectedNavItem.name}
+            </h1>
+
+            <p className="text-sm text-gray-500">
+              {selectedNavItem.description}
+            </p>
+          </div>
+        </header>
+      </div>
+
+      {/* <div className="flex flex-col gap-2">
+        <h2 className="text-lg font-medium">{selectedNavItem.name}</h2>
+        <p className="text-sm text-gray-500">{selectedNavItem.description}</p>
+      </div> */}
     </>
   );
 };

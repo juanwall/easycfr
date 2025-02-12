@@ -18,3 +18,8 @@ export interface IAgencyChild extends IAgencyBase {
 export interface IAgency extends IAgencyBase {
   children?: IAgencyChild[];
 }
+
+export interface IDatePill {
+  id: string;
+  date: Date;
+}
