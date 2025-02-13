@@ -146,7 +146,7 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
       >
         {isLoading && (
           <g className="relative">
-            <foreignObject x="95" y="405" width="80" height="20">
+            <foreignObject x="105" y="405" width="80" height="20">
               <div className="flex items-center justify-center">
                 <ArrowPathIcon className="w-4 h-4 text-gray-500 animate-spin mr-1" />
                 <span className="text-gray-500 text-sm">Working...</span>
