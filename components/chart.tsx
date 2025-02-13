@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import twColors from 'tailwindcss/colors';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 import { IAgency, IRegsByDate } from '@/lib/types';
 
@@ -24,6 +25,8 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
     Array<{ [key: string]: any }>
   >([]);
   const [colors, setColors] = useState<{ [key: string]: string }>({});
+  const [isLoading, setIsLoading] = useState(false);
+
   const workerRef = useRef<Worker | null>(null);
 
   const tailwindColors = [
@@ -65,6 +68,7 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
 
     workerRef.current.onmessage = (e: MessageEvent) => {
       setFormattedData(e.data);
+      setIsLoading(false);
     };
 
     return () => {
@@ -75,6 +79,7 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
   useEffect(() => {
     if (!workerRef.current) return;
 
+    setIsLoading(true);
     workerRef.current.postMessage({
       regsByDate,
       selectedAgencies,
@@ -101,7 +106,7 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
     if (value >= 1000000) {
       return `${(value / 1000000).toFixed(1)}M`;
     } else if (value >= 1000) {
-      return `${(value / 1000).toFixed(0)}K`;
+      return `${(value / 1000).toFixed(1)}K`;
     }
     return value.toString();
   };
@@ -139,6 +144,16 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
           bottom: 5,
         }}
       >
+        {isLoading && (
+          <g className="relative">
+            <foreignObject x="95" y="405" width="80" height="20">
+              <div className="flex items-center justify-center">
+                <ArrowPathIcon className="w-4 h-4 text-gray-500 animate-spin mr-1" />
+                <span className="text-gray-500 text-sm">Working...</span>
+              </div>
+            </foreignObject>
+          </g>
+        )}
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" tickFormatter={formatDate} dy={7} />
         <YAxis
