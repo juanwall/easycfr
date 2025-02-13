@@ -7,15 +7,15 @@ import {
   DisclosurePanel,
 } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 import { classNames } from '@/lib/utils';
-import Link from 'next/link';
 
 const navigation = [
   {
     name: 'Agency analyzer',
     href: '/',
-    description: `Analyze regulations by agency across time.`,
+    description: `Analyze regulations by eCFR entity across time.`,
   },
 ];
 
@@ -112,11 +112,6 @@ const Header = () => {
           </div>
         </header>
       </div>
-
-      {/* <div className="flex flex-col gap-2">
-        <h2 className="text-lg font-medium">{selectedNavItem.name}</h2>
-        <p className="text-sm text-gray-500">{selectedNavItem.description}</p>
-      </div> */}
     </>
   );
 };

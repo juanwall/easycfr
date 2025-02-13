@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Doto } from 'next/font/google';
+import { ToastContainer } from 'react-toastify';
 
 import '@/app/globals.css';
 import Header from '@/components/header';
+
 const doto = Doto({
   weight: '700',
   variable: '--font-doto',
@@ -24,9 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="h-full bg-gray-100" lang="en">
-      <body className={`${doto.variable} antialiased h-full`}>
+    <html className="h-full bg-gray-50" lang="en">
+      <body className={`${doto.variable} antialiased h-full bg-gray-50`}>
         <div className="min-h-full">
+          <ToastContainer className="text-sm" />
+
           <Header />
 
           <main>

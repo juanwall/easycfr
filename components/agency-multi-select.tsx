@@ -6,17 +6,18 @@ import {
 } from '@heroicons/react/24/outline';
 import { QuestionMarkCircleIcon } from '@heroicons/react/20/solid';
 
-import { IAgency, IAgencyChild } from '@/lib/types';
+import { IAgency } from '@/lib/types';
 import Tooltip from '@/components/tooltip';
 import { INPUT_CLASS_NAME, LABEL_CLASS_NAME } from '@/lib/constants';
 
 interface AgencyMultiSelectProps {
   agencies: IAgency[];
-  selectedAgencies: (IAgency | IAgencyChild)[];
-  onChange: (selected: (IAgency | IAgencyChild)[]) => void;
+  selectedAgencies: IAgency[];
+  onChange: (selected: IAgency[]) => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   isLoadingAgencies: boolean;
+  isLoadingRegs: boolean;
 }
 
 export const AgencyMultiSelect = ({
@@ -26,6 +27,7 @@ export const AgencyMultiSelect = ({
   isOpen,
   setIsOpen,
   isLoadingAgencies,
+  isLoadingRegs,
 }: AgencyMultiSelectProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -57,7 +59,7 @@ export const AgencyMultiSelect = ({
     };
   }, [isOpen]);
 
-  const isSelected = (agency: IAgency | IAgencyChild) => {
+  const isSelected = (agency: IAgency) => {
     return selectedAgencies.some((selected) => selected.slug === agency.slug);
   };
 
@@ -81,7 +83,7 @@ export const AgencyMultiSelect = ({
     }
   };
 
-  const handleChildToggle = (parent: IAgency, child: IAgencyChild) => {
+  const handleChildToggle = (parent: IAgency, child: IAgency) => {
     if (isSelected(child)) {
       // Deselect child and parent
       const newSelected = selectedAgencies.filter(
@@ -121,10 +123,10 @@ export const AgencyMultiSelect = ({
   return (
     <div className="w-full">
       <label className={LABEL_CLASS_NAME}>
-        Agencies
+        Entities
         <Tooltip
           id={`agencies-tooltip`}
-          content={`Select one or more agencies. Your results will be limited to the selected agencies.`}
+          content={`Select one or more entities. Your results will be limited to the selected entities.`}
           place="bottom"
         >
           <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
@@ -136,16 +138,27 @@ export const AgencyMultiSelect = ({
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={INPUT_CLASS_NAME}
+            disabled={isLoadingRegs}
           >
             <div className="flex items-center justify-between">
               <span>
-                {selectedAgencies.length === 0 ? (
-                  <span className="text-gray-500">Select agencies...</span>
-                ) : (
-                  <span>
-                    {selectedAgencies.length} agenc
-                    {selectedAgencies.length === 1 ? 'y' : 'ies'} selected
+                {isLoadingRegs ? (
+                  <span className="text-gray-500 flex items-center gap-2">
+                    <ArrowPathIcon className="w-4 h-4 animate-spin" />
+                    Fetching regs for {selectedAgencies.length} entit
+                    {selectedAgencies.length === 1 ? 'y' : 'ies'}...
                   </span>
+                ) : (
+                  <>
+                    {selectedAgencies.length === 0 ? (
+                      <span className="text-gray-500">Select entities...</span>
+                    ) : (
+                      <span>
+                        {selectedAgencies.length} entit
+                        {selectedAgencies.length === 1 ? 'y' : 'ies'} selected
+                      </span>
+                    )}
+                  </>
                 )}
               </span>
               <div className="flex items-center gap-2">
@@ -188,7 +201,7 @@ export const AgencyMultiSelect = ({
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search agencies..."
+                placeholder="Search entities..."
                 className="w-full px-3 py-1 outline-none"
                 onClick={(e) => e.stopPropagation()}
               />

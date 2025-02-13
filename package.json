@@ -18,14 +18,17 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-tailwindcss-datepicker": "^2.0.0",
+    "react-toastify": "^11.0.3",
     "react-tooltip": "^5.28.0",
-    "recharts": "^2.15.1"
+    "recharts": "^2.15.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/xml2js": "^0.4.14",
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
