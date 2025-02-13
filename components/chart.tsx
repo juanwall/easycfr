@@ -140,7 +140,7 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
         margin={{
           top: 20,
           right: 30,
-          left: 30,
+          left: 40,
           bottom: 5,
         }}
       >
@@ -163,7 +163,7 @@ const Chart = ({ regsByDate, selectedAgencies, targetWord }: IProps) => {
             angle: -90,
             position: 'insideLeft',
             style: { textAnchor: 'middle' },
-            dx: -10,
+            dx: -20,
           }}
         />
         <Tooltip
